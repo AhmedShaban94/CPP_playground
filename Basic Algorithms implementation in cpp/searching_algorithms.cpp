@@ -1,7 +1,7 @@
 #include "searching_algorithms.hpp"
 
-template <class T>
-int searching_algorithms::sequential_search(std::vector<T>& array, int key)
+//template <class T>
+int searching_algorithms::sequential_search(std::vector<double>& array, int key)
 {
 	for (int i = 0; i < array.size(); ++i)
 		if (array.at(i) == key)
@@ -13,8 +13,8 @@ int searching_algorithms::sequential_search(std::vector<T>& array, int key)
 	return 0;
 }
 
-template <class T>
-int searching_algorithms::binary_search(std::vector<T>& arr, int key, searching_algorithms::binary_search_method method)
+//template <class T>
+int searching_algorithms::binary_search(std::vector<double>& arr, int key, searching_algorithms::binary_search_method method)
 {
 	//the array must be sorted to perform binary search  
 	std::sort(arr.begin(), arr.end());
