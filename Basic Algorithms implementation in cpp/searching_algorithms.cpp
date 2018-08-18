@@ -1,7 +1,7 @@
 #include "searching_algorithms.hpp"
 
-
-int searching_algorithms::sequential_search(std::vector<int>& array, int key)
+template <class T>
+int searching_algorithms::sequential_search(std::vector<T>& array, int key)
 {
 	for (int i = 0; i < array.size(); ++i)
 		if (array.at(i) == key)
@@ -13,8 +13,8 @@ int searching_algorithms::sequential_search(std::vector<int>& array, int key)
 	return 0;
 }
 
-
-int searching_algorithms::binary_search(std::vector<int>& arr, int key, searching_algorithms::binary_search_method method)
+template <class T>
+int searching_algorithms::binary_search(std::vector<T>& arr, int key, searching_algorithms::binary_search_method method)
 {
 	//the array must be sorted to perform binary search  
 	std::sort(arr.begin(), arr.end());
@@ -22,7 +22,7 @@ int searching_algorithms::binary_search(std::vector<int>& arr, int key, searchin
 	//declaring important variables 
 	int first_idx = 0;
 	int last_idx = arr.size() - 1;
-	int mid_idx = (first_idx + last_idx) / 2;
+	int mid_idx;
 	bool found = false;
 
 	switch (method)
@@ -32,21 +32,26 @@ int searching_algorithms::binary_search(std::vector<int>& arr, int key, searchin
 		//binary search using looping method 
 		while (first_idx <= last_idx && !found)
 		{
+			mid_idx = (first_idx + last_idx) / 2;
+
 			if (arr.at(mid_idx) == key)
-				found = true; 
+			{
+				found = true;
+				return mid_idx;
+			}
+
+			if (key > arr.at(mid_idx))
+			{
+				first_idx = mid_idx + 1;
+			}
+
 			else
 			{
-				if (arr.at(mid_idx) > key)
-				{
-					last_idx = mid_idx - 1;
-				}
-				else
-					first_idx = mid_idx + 1;
+				last_idx = mid_idx - 1;
 			}
 		}
-		return mid_idx;
 	}
-	
+
 	case recursive:
 	{
 
