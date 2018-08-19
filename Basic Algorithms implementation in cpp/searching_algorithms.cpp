@@ -45,13 +45,11 @@ double searching_algorithms::sequential_search(std::vector<double>& array, int k
 	return 0;
 }
 
-double searching_algorithms::binary_search(std::vector<double>& arr, int key, searching_algorithms::binary_search_method method)
+bool searching_algorithms::binary_search(std::vector<double>& arr, int key, searching_algorithms::binary_search_method method)
 {
 	if (arr.size() == 0)
 		return 0;
 
-	//the array must be sorted to perform binary search  
-	std::sort(arr.begin(), arr.end());
 
 	//declaring important variables 
 	int first_idx = 0;
@@ -63,7 +61,7 @@ double searching_algorithms::binary_search(std::vector<double>& arr, int key, se
 	{
 	case iterative:
 	{
-		//binary search using looping method 
+		//binary search using iterative method 
 		while (first_idx <= last_idx && !found)
 		{
 			mid_idx = (first_idx + last_idx) / 2;
@@ -71,7 +69,7 @@ double searching_algorithms::binary_search(std::vector<double>& arr, int key, se
 			if (arr.at(mid_idx) == key)
 			{
 				found = true;
-				return mid_idx;
+				break;
 			}
 
 			if (key > arr.at(mid_idx))
@@ -84,13 +82,22 @@ double searching_algorithms::binary_search(std::vector<double>& arr, int key, se
 				last_idx = mid_idx - 1;
 			}
 		}
+
 	}
 
+	break;
 	case recursive:
 	{
+		bool found = false;
+		//the array must be sorted to perform binary search  
+		std::sort(arr.begin(), arr.end());
+
 		mid_idx = arr.size() / 2;
 		if (key == arr.at(mid_idx))
-			return mid_idx;
+		{
+			found = true;
+			break;
+		}
 
 		if (key > arr.at(mid_idx))
 		{
@@ -107,6 +114,7 @@ double searching_algorithms::binary_search(std::vector<double>& arr, int key, se
 		}
 
 	}
-
+	break;
 	}
+	return found;
 }

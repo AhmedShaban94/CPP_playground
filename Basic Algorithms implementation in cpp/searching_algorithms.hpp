@@ -14,7 +14,7 @@ public:
 
 	static double sequential_search(std::vector<double>& array, int key);
 
-	static double binary_search(std::vector<double>& array, int key, searching_algorithms::binary_search_method search);
+	static bool binary_search(std::vector<double>& array, int key, searching_algorithms::binary_search_method search);
 
 	static std::vector<double> slice(std::vector<double>& v, int m, int n);
 

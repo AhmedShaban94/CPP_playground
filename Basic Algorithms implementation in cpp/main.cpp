@@ -23,11 +23,8 @@ int main()
 	//putting th key in random place in the vector. 
 	srand(time(0));
 	int random_index = rand() % vec.size(); 
-	vec.at(random_index) = 5.0; 
-	
-	//for noe, can't retrive the index of the key for binary search using recursive method. 
-	std::cout << "index of " << key << " is " << searching_algorithms::binary_search(vec, key, method) << '\n';
-
+	vec.at(9) = 5.0;
+	std::cout << "index: " <<  searching_algorithms::sequential_search(vec, key) << '\n';  
 	searching_algorithms::time_comparison(vec, key); 
 	return EXIT_SUCCESS;
 }
