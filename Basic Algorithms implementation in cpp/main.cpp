@@ -8,13 +8,14 @@
 
 int main()
 {
-	searching_algorithms::binary_search_method method = searching_algorithms::binary_search_method::iterative;
+	searching_algorithms algorithm;
 	double key;
 	std::vector<double> vec(10);
 	std::cout << "Enter a number you're searching for\n";
 	std::cin >> key;
 	std::default_random_engine generator;
 	std::uniform_real_distribution<double> distribution(1, 100);
+
 	for (auto it = vec.begin() + 1; it != vec.end(); ++it)
 	{
 		*it = distribution(generator);
@@ -22,9 +23,9 @@ int main()
 
 	//putting th key in random place in the vector. 
 	srand(time(0));
-	int random_index = rand() % vec.size(); 
+	int random_index = rand() % vec.size();
 	vec.at(9) = 5.0;
-	std::cout << "index: " <<  searching_algorithms::sequential_search(vec, key) << '\n';  
-	searching_algorithms::time_comparison(vec, key); 
+	std::cout << "index: " << algorithm.sequential_search(vec, key) << '\n';
+	algorithm.time_comparison(vec, key);
 	return EXIT_SUCCESS;
 }
