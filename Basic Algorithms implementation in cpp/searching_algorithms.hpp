@@ -11,8 +11,8 @@ class searching_algorithms
 public:
 	//returns index of the key, if exists 
 	enum binary_search_method { iterative, recursive };
-	double sequential_search(std::vector<double>& array, int key);
-	bool binary_search(std::vector<double>& array, int key, searching_algorithms::binary_search_method search);
+	bool sequential_search(std::vector<double>& array, double key);
+	bool binary_search(std::vector<double>& array, double key, searching_algorithms::binary_search_method search);
 	std::vector<double> slice(std::vector<double>& v, int m, int n);
-	void time_comparison(std::vector<double>& arr, int key);
+	void time_comparison(std::vector<double>& arr, double key);
 };

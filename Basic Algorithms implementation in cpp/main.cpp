@@ -5,27 +5,14 @@
 #include "searching_algorithms.hpp"
 #include "sorting_algorithms.hpp" 
 
-
 int main()
 {
-	searching_algorithms algorithm;
-	double key;
-	std::vector<double> vec(10);
-	std::cout << "Enter a number you're searching for\n";
-	std::cin >> key;
-	std::default_random_engine generator;
-	std::uniform_real_distribution<double> distribution(1, 100);
-
-	for (auto it = vec.begin() + 1; it != vec.end(); ++it)
-	{
-		*it = distribution(generator);
-	}
-
-	//putting th key in random place in the vector. 
-	srand(time(0));
-	int random_index = rand() % vec.size();
-	vec.at(9) = 5.0;
-	std::cout << "index: " << algorithm.sequential_search(vec, key) << '\n';
-	algorithm.time_comparison(vec, key);
+	//driver for testing searching algorithms. 
+	std::vector<double> vec{ 10, 5, 6, 8, 9, 5, 6, 1, 2, 22, 45, 7, 10 }; 
+	searching_algorithms algorithm; 
+	double key; 
+	std::cout << "Enter key: \n"; 
+	std::cin >> key; 
+	algorithm.time_comparison(vec, key); 
 	return EXIT_SUCCESS;
 }
