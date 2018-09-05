@@ -4,28 +4,28 @@ void searching_algorithms::time_comparison(std::vector<double>& arr, double key)
 {
 	//sequential search 
 	int found;
-	auto start = std::chrono::system_clock::now();
+	auto start = std::chrono::high_resolution_clock::now();
 	found = searching_algorithms::sequential_search(arr, key);
-	auto end = std::chrono::system_clock::now();
-	std::chrono::duration<double, std::milli> elapsed_time = end - start;
-	std::cout << "Sequential search took: " << elapsed_time.count() << " ms" << "....";
+	auto end = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double, std::micro> elapsed_time = end - start;
+	std::cout << "Sequential search took: " << elapsed_time.count() << " us" << "....";
 	found ? std::cout << " found\n" : std::cout << " not found\n";
 
 	//binary search with iterative method 
-	start = std::chrono::system_clock::now();
+	start = std::chrono::high_resolution_clock::now();
 	found = searching_algorithms::binary_search(arr, key, searching_algorithms::binary_search_method::iterative);
-	end = std::chrono::system_clock::now();
+	end = std::chrono::high_resolution_clock::now();
 	elapsed_time = end - start;
-	std::cout << "Binary search (iterative): " << elapsed_time.count() << " ms" << "....";
+	std::cout << "Binary search (iterative): " << elapsed_time.count() << " us" << "....";
 	found ? std::cout << " found\n" : std::cout << " not found\n";
 
 
 	//binary search with recursive method 
-	start = std::chrono::system_clock::now();
+	start = std::chrono::high_resolution_clock::now();
 	found = searching_algorithms::binary_search(arr, key, searching_algorithms::binary_search_method::recursive);
-	end = std::chrono::system_clock::now();
+	end = std::chrono::high_resolution_clock::now();
 	elapsed_time = end - start;
-	std::cout << "Binary search (recursive): " << elapsed_time.count() << " ms" << "....";
+	std::cout << "Binary search (recursive): " << elapsed_time.count() << " us" << "....";
 	found ? std::cout << " found\n" : std::cout << " not found\n";
 }
 
