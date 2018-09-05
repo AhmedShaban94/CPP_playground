@@ -3,13 +3,13 @@
 void searching_algorithms::time_comparison(std::vector<double>& arr, double key)
 {
 	//sequential search 
-	bool found = false; 
+	int found;
 	auto start = std::chrono::system_clock::now();
 	found = searching_algorithms::sequential_search(arr, key);
 	auto end = std::chrono::system_clock::now();
 	std::chrono::duration<double, std::milli> elapsed_time = end - start;
 	std::cout << "Sequential search took: " << elapsed_time.count() << " ms" << "....";
-	found ? std::cout << " found\n" : std::cout << " Not found\n"; 
+	found ? std::cout << " found\n" : std::cout << " not found\n";
 
 	//binary search with iterative method 
 	start = std::chrono::system_clock::now();
@@ -17,8 +17,8 @@ void searching_algorithms::time_comparison(std::vector<double>& arr, double key)
 	end = std::chrono::system_clock::now();
 	elapsed_time = end - start;
 	std::cout << "Binary search (iterative): " << elapsed_time.count() << " ms" << "....";
-	found ? std::cout << " found\n" : std::cout << " not found\n"; 
-	
+	found ? std::cout << " found\n" : std::cout << " not found\n";
+
 
 	//binary search with recursive method 
 	start = std::chrono::system_clock::now();
@@ -26,7 +26,7 @@ void searching_algorithms::time_comparison(std::vector<double>& arr, double key)
 	end = std::chrono::system_clock::now();
 	elapsed_time = end - start;
 	std::cout << "Binary search (recursive): " << elapsed_time.count() << " ms" << "....";
-	found ? std::cout << " found\n" : std::cout << " not found\n"; 
+	found ? std::cout << " found\n" : std::cout << " not found\n";
 }
 
 std::vector<double> searching_algorithms::slice(std::vector<double>& v, int m, int n)
@@ -38,45 +38,44 @@ std::vector<double> searching_algorithms::slice(std::vector<double>& v, int m, i
 }
 
 
-bool searching_algorithms::sequential_search(std::vector<double>& array, double key)
+int searching_algorithms::sequential_search(std::vector<double>& array, double key)
 {
 	for (int i = 0; i < array.size(); ++i)
 		if (array.at(i) == key)
 		{
 			//using transpose method
 			std::swap(array.at(i), array.at(i - 1));
-			return true;
+			return i;
 		}
-	return false;
+	return 0;
 }
 
-bool searching_algorithms::binary_search(std::vector<double>& arr, double key, searching_algorithms::binary_search_method method)
+int searching_algorithms::binary_search(std::vector<double>& arr, double key, searching_algorithms::binary_search_method method)
 {
 	if (arr.size() == 0)
 		return 0;
 
 	//for binary search, the array must be sorted 
-	std::sort(arr.begin(), arr.end()); 
-	
+	std::sort(arr.begin(), arr.end());
+
 	//declaring important variables 
 	int first_idx = 0;
 	int last_idx = arr.size() - 1;
 	int mid_idx;
-	bool found = false;
+	//bool found = false;
 
 	switch (method)
 	{
 	case iterative:
 	{
 		//binary search using iterative method 
-		while (first_idx <= last_idx && !found)
+		while (first_idx <= last_idx)
 		{
 			mid_idx = (first_idx + last_idx) / 2;
 
 			if (arr.at(mid_idx) == key)
 			{
-				found = true;
-				break;
+				return mid_idx;
 			}
 
 			if (key > arr.at(mid_idx))
@@ -89,39 +88,40 @@ bool searching_algorithms::binary_search(std::vector<double>& arr, double key, s
 				last_idx = mid_idx - 1;
 			}
 		}
-
+		return 0;
 	}
 
 	break;
 	case recursive:
 	{
-		bool found = false;
-		//the array must be sorted to perform binary search  
-		//std::sort(arr.begin(), arr.end());
-
-		mid_idx = arr.size() / 2;
-		if (key == arr.at(mid_idx))
+		//declaring important variables 
+		int first_idx = 0;
+		int last_idx = arr.size() - 1;
+		
+		if (first_idx <= last_idx)
 		{
-			found = true;
-			break;
-		}
+			int mid_idx = arr.size() / 2;
+			if (key == arr.at(mid_idx))
+			{
+				return 1;
+			}
 
-		if (key > arr.at(mid_idx))
-		{
-			first_idx = mid_idx + 1;
-			std::vector<double> sub_vec = slice(arr, first_idx, last_idx);
-			binary_search(sub_vec, key, method);
-		}
+			if (arr.at(mid_idx) > key)
+			{
+				last_idx = mid_idx - 1;
+				std::vector<double> sub_vec = slice(arr, first_idx, last_idx);
+				return binary_search(sub_vec, key, method);
+			}
 
-		else
-		{
-			last_idx = mid_idx - 1;
-			std::vector<double> sub_vec = slice(arr, first_idx, last_idx);
-			binary_search(sub_vec, key, method);
+			else
+			{
+				first_idx = mid_idx + 1;
+				std::vector<double> sub_vec = slice(arr, first_idx, last_idx);
+				return binary_search(sub_vec, key, method);
+			}
 		}
-
+			return 0;
 	}
 	break;
 	}
-	return found;
 }
