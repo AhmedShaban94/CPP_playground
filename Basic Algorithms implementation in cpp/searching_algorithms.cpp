@@ -56,7 +56,6 @@ int searching_algorithms::binary_search(std::vector<double>& arr, double key, se
 		return 0;
 
 	//for binary search, the array must be sorted 
-	std::sort(arr.begin(), arr.end());
 
 	//declaring important variables 
 	int first_idx = 0;
@@ -95,9 +94,10 @@ int searching_algorithms::binary_search(std::vector<double>& arr, double key, se
 	case recursive:
 	{
 		//declaring important variables 
+		//std::sort(arr.begin(), arr.end());
 		int first_idx = 0;
 		int last_idx = arr.size() - 1;
-		
+
 		if (first_idx <= last_idx)
 		{
 			int mid_idx = arr.size() / 2;
@@ -120,7 +120,7 @@ int searching_algorithms::binary_search(std::vector<double>& arr, double key, se
 				return binary_search(sub_vec, key, method);
 			}
 		}
-			return 0;
+		return 0;
 	}
 	break;
 	}

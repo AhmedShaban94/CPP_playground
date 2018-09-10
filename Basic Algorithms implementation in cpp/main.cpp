@@ -11,6 +11,7 @@ int main()
 	searching_algorithms algorithm;
 	std::vector<double> vec(1000);
 	std::generate(vec.begin(), vec.end(), std::rand);
+	std::sort(vec.begin(), vec.end());
 	double key = *(vec.cend() - 1);
 	algorithm.time_comparison(vec, key);
 	return EXIT_SUCCESS;
