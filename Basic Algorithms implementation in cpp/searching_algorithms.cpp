@@ -1,6 +1,6 @@
 #include "searching_algorithms.hpp"
 
-void searching_algorithms::time_comparison(std::vector<double>& arr, double key)
+void searching_algorithms::time_comparison(const std::vector<double>& arr, double key)
 {
 	//sequential search 
 	int found;
@@ -29,7 +29,7 @@ void searching_algorithms::time_comparison(std::vector<double>& arr, double key)
 	found ? std::cout << " found\n" : std::cout << " not found\n";
 }
 
-std::vector<double> searching_algorithms::slice(std::vector<double>& v, int m, int n)
+std::vector<double> searching_algorithms::slice(const std::vector<double>& v, int m, int n)
 {
 	auto first = v.cbegin() + m;
 	auto last = v.cbegin() + n + 1;
@@ -38,7 +38,7 @@ std::vector<double> searching_algorithms::slice(std::vector<double>& v, int m, i
 }
 
 
-int searching_algorithms::sequential_search(std::vector<double>& array, double key)
+int searching_algorithms::sequential_search(std::vector<double> array, double key)
 {
 	for (int i = 0; i < array.size(); ++i)
 		if (array.at(i) == key)
@@ -50,7 +50,7 @@ int searching_algorithms::sequential_search(std::vector<double>& array, double k
 	return 0;
 }
 
-int searching_algorithms::binary_search(std::vector<double>& arr, double key, searching_algorithms::binary_search_method method)
+int searching_algorithms::binary_search(const std::vector<double>& arr, double key, searching_algorithms::binary_search_method method)
 {
 	if (arr.size() == 0)
 		return 0;
