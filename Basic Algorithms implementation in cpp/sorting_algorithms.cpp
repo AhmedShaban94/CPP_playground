@@ -52,17 +52,36 @@ std::vector<int> sorting_algorithms::sort()
 		}
 		break;
 	}
-	case quick:
-		std::cout << "performing quick sort\n";
-		break;
 	case insertion:
+	{
 		std::cout << "performing insertion sort\n";
+		vec = _arr;
+		int i, j, temp, size = vec.size();
+
+		// perform outer loop
+		for (i = 0; i < size - 1; ++i)
+		{
+			j = i + 1;
+			temp = vec[j];
+			// perform shifting loop
+			while (j > 0 && temp < vec[j - 1])
+			{
+				vec[j] = vec[j - 1];
+				--j;
+			}
+			// assigning temp value to the right position
+			vec[j] = temp;
+		}
 		break;
+	}
 	case shell:
 		std::cout << "performing shell sort\n";
 		break;
 	case merge:
 		std::cout << "performing merge sort\n";
+		break;
+	case quick:
+		std::cout << "performing quick sort\n";
 		break;
 	case heap:
 		std::cout << "performing heap sort\n";
