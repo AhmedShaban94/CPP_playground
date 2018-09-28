@@ -1,7 +1,7 @@
 #pragma once 
 
 #include<vector> 
-enum sorting_algorithm_method { bubble, quick, insertion, selection, shell, merge, heap };
+enum sorting_algorithm_method { bubble, quick, insertion, selection, merge, heap };
 class sorting_algorithms
 {
 private:
