@@ -6,6 +6,63 @@ sorting_algorithms::sorting_algorithms(std::vector<int> arr, sorting_algorithm_m
 
 sorting_algorithms::~sorting_algorithms() { _arr.clear(); }
 
+std::vector<int> sorting_algorithms::merge_sort(std::vector<int> vec)
+{
+	//base case, the vector is sorted if its size is 1. 
+	if (vec.size() == 1)
+	{
+		return vec;
+	}
+
+	//finding the iterator of the middle element. 
+	std::vector<int>::iterator middle = vec.begin() + (vec.size() / 2);
+
+	//splitting vector to left and right (divide step) 
+	std::vector<int> left(vec.begin(), middle);
+	std::vector<int> right(middle, vec.end());
+
+	//perform merge sort on the splitted vectors. 
+	left = merge_sort(left);
+	right = merge_sort(right);
+
+	return merge(left, right);
+}
+
+std::vector<int> sorting_algorithms::merge(std::vector<int> left, std::vector<int> right)
+{
+	unsigned int left_it = 0, right_it = 0;
+	std::vector<int> result;
+
+	//comparing between two vectors' elements and push_back the bigger to the result vector.
+	while (left_it < left.size() && right_it < right.size())
+	{
+		if (left[left_it] < right[right_it])
+		{
+			result.push_back(left[left_it]);
+			left_it++;
+		}
+		else
+		{
+			result.push_back(right[right_it]);
+			right_it++;
+		}
+	}
+
+	//push the remainging data from both vectors into the result. 
+	while (left_it < left.size())
+	{
+		result.push_back(left[left_it]);
+		left_it++;
+	}
+	while (right_it < right.size())
+	{
+		result.push_back(right[right_it]);
+		right_it++;
+	}
+
+	return result;
+}
+
 std::vector<int> sorting_algorithms::sort()
 {
 	std::vector<int> vec;
@@ -74,9 +131,11 @@ std::vector<int> sorting_algorithms::sort()
 		}
 		break;
 	}
-	case merge:
+	case mergeSort:
 	{
 		std::cout << "performing merge sort\n";
+		vec = _arr;
+		vec = merge_sort(vec);
 		break;
 	}
 	case quick:
