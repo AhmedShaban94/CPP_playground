@@ -6,6 +6,11 @@ sorting_algorithms::sorting_algorithms(std::vector<int> arr, sorting_algorithm_m
 
 sorting_algorithms::~sorting_algorithms() { _arr.clear(); }
 
+/**
+ * \brief
+ * \param vec
+ * \return
+ */
 std::vector<int> sorting_algorithms::merge_sort(std::vector<int> vec)
 {
 	//base case, the vector is sorted if its size is 1. 
@@ -48,7 +53,7 @@ std::vector<int> sorting_algorithms::merge(std::vector<int> left, std::vector<in
 		}
 	}
 
-	//push the remainging data from both vectors into the result. 
+	//push the remaining data from both vectors into the result. 
 	while (left_it < left.size())
 	{
 		result.push_back(left[left_it]);
@@ -63,6 +68,37 @@ std::vector<int> sorting_algorithms::merge(std::vector<int> left, std::vector<in
 	return result;
 }
 
+void sorting_algorithms::quick_sort(std::vector<int>& vec, int first_index, int last_index)
+{
+	if (first_index < last_index)
+	{
+		int split_point = partition(vec, first_index, last_index);
+
+		//splitting the vector to left half. 
+		quick_sort(vec, first_index, split_point - 1);
+		//splitting the vector to right half 
+		quick_sort(vec, split_point + 1, last_index);
+	}
+}
+
+
+int sorting_algorithms::partition(std::vector<int>& vec, int first_index, int last_index)
+{
+	int pivot = vec[first_index];
+	int i = first_index, j = last_index;
+	while (i != j)
+	{
+		if (vec[i] > vec[j])
+			std::swap(vec[i], vec[j]);
+		if (vec[i] != pivot)
+			++i;
+		else
+			--j;
+	}
+	return i;
+}
+
+
 std::vector<int> sorting_algorithms::sort()
 {
 	std::vector<int> vec;
@@ -72,14 +108,14 @@ std::vector<int> sorting_algorithms::sort()
 	{
 		std::cout << "performing bubble sort\n";
 		vec = _arr;
-		bool sorted = false;
+		auto sorted = false;
 		int pass_through = vec.size() - 1;
 		while (!sorted)
 		{
 			sorted = true;
 			//for loop for passes through.
 			for (int i = 0; i < pass_through; ++i)
-				//for loop to swap adjasent elements except the sorted ones (i). 
+				//for loop to swap adjacent elements except the sorted ones (i). 
 				for (int j = 0; j < pass_through - i; ++j)
 					if (vec[j] > vec[j + 1])
 					{
@@ -95,7 +131,7 @@ std::vector<int> sorting_algorithms::sort()
 		vec = _arr;
 		int n = vec.size();
 		int i, j, min_index;
-		//looping on all elements up to the last elemnt/index. 
+		//looping on all elements up to the last element/index. 
 		for (i = 0; i < n - 1; ++i)
 		{
 			min_index = i;
@@ -141,6 +177,8 @@ std::vector<int> sorting_algorithms::sort()
 	case quick:
 	{
 		std::cout << "performing quick sort\n";
+		vec = _arr;
+		sorting_algorithms::quick_sort(vec, 0, vec.size() - 1);
 		break;
 	}
 	case heap:
