@@ -7,7 +7,7 @@
 
 int main()
 {
-	std::vector<int> vec(10);
+	std::vector<int> vec(1000);
 	std::generate(vec.begin(), vec.end(), std::rand);
 	std::vector<int> extreme{ 10,9,8,7,6,5,4,3,2,1,0 };
 	sorting_algorithms algorithm(vec, sorting_algorithm_method::quick);
@@ -15,5 +15,7 @@ int main()
 	for (const auto& ele : sorted_vector)
 		std::cout << ele << ' ';
 	std::cout << '\n';
+	auto result = algorithm.check(vec, sorted_vector);
+	result == true ? std::cout << "success !" : std::cout << "Failed !";
 	return EXIT_SUCCESS;
 }

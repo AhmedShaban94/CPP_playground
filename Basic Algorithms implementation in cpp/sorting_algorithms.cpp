@@ -99,6 +99,25 @@ int sorting_algorithms::partition(std::vector<int>& vec, int first_index, int la
 }
 
 
+bool sorting_algorithms::check(const std::vector<int>& vec, const std::vector<int>& my_sorted) const
+{
+	auto stl_sorted = vec;
+	bool success = true;
+	unsigned int itr = 0;
+
+	std::sort(stl_sorted.begin(), stl_sorted.end());
+	for (const auto& ele : stl_sorted)
+	{
+		if (my_sorted[itr] != ele)
+		{
+			success = false;
+			break;
+		}
+		++itr;
+	}
+	return success;
+}
+
 std::vector<int> sorting_algorithms::sort()
 {
 	std::vector<int> vec;
