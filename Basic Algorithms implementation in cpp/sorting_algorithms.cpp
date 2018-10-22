@@ -99,6 +99,29 @@ int sorting_algorithms::partition(std::vector<int>& vec, int first_index, int la
 }
 
 
+void sorting_algorithms::heapify(std::vector<int>& vec, int n, int root)
+{
+	int size = n;
+	int largest = root;
+	int left_child = 2 * root + 1;
+	int right_child = 2 * root + 2;
+
+	//if left child is larger than root, swap. 
+	if (left_child < size && vec[left_child] > vec[largest])
+		largest = left_child;
+
+	//if right child is larger than root, swap. 
+	if (right_child < size && vec[right_child] > vec[largest])
+		largest = right_child;
+
+	//if the root is not the largest
+	if (root != largest)
+	{
+		std::swap(vec[root], vec[largest]);
+		heapify(vec, n, largest);
+	}
+}
+
 std::vector<int> sorting_algorithms::sort()
 {
 	std::vector<int> vec;
@@ -184,6 +207,20 @@ std::vector<int> sorting_algorithms::sort()
 	case heap:
 	{
 		std::cout << "performing heap sort\n";
+		vec = _arr;
+		int size = vec.size();
+
+		//building the tree. 
+		for (int i = size / 2 - 1; i >= 0; --i)
+			heapify(vec, size, i);
+
+		for (int i = size - 1; i >= 0; --i)
+		{
+			std::swap(vec[i], vec[0]);
+
+			heapify(vec, i, 0);
+		}
+
 		break;
 	}
 	default:
