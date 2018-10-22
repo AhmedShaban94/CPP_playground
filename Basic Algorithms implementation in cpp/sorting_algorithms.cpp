@@ -121,6 +121,24 @@ void sorting_algorithms::heapify(std::vector<int>& vec, int n, int root)
 		heapify(vec, n, largest);
 	}
 }
+bool sorting_algorithms::check(const std::vector<int>& vec, const std::vector<int>& my_sorted) const
+{
+	auto stl_sorted = vec;
+	bool success = true;
+	unsigned int itr = 0;
+
+	std::sort(stl_sorted.begin(), stl_sorted.end());
+	for (const auto& ele : stl_sorted)
+	{
+		if (my_sorted[itr] != ele)
+		{
+			success = false;
+			break;
+		}
+		++itr;
+	}
+	return success;
+}
 
 std::vector<int> sorting_algorithms::sort()
 {

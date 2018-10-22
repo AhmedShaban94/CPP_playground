@@ -1,6 +1,7 @@
 #pragma once 
 
 #include<vector> 
+#include <algorithm>
 enum sorting_algorithm_method { bubble, quick, insertion, selection, mergeSort, heap };
 class sorting_algorithms
 {
@@ -29,4 +30,5 @@ public:
 	sorting_algorithms(std::vector<int> arr, sorting_algorithm_method method);
 	~sorting_algorithms();
 	std::vector<int> sort();
+	bool check(const std::vector<int>& vec, const std::vector<int>& my_sorted) const; 
 };
