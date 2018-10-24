@@ -1,4 +1,3 @@
-#include <iostream>
 #include "sorting_algorithms.hpp"
 
 sorting_algorithms::sorting_algorithms(std::vector<int> arr, sorting_algorithm_method method)
@@ -102,6 +101,8 @@ int sorting_algorithms::partition(std::vector<int>& vec, int first_index, int la
 void sorting_algorithms::heapify(std::vector<int>& vec, int n, int root)
 {
 	int size = n;
+
+	//largest is a pointer (index) of the largest element in sub-tree. 
 	int largest = root;
 	int left_child = 2 * root + 1;
 	int right_child = 2 * root + 2;
@@ -139,6 +140,80 @@ bool sorting_algorithms::check(const std::vector<int>& vec, const std::vector<in
 	}
 	return success;
 }
+
+void sorting_algorithms::time_comparison(const std::vector<int>& vec)
+{
+	//initializing timing variables. 
+	std::chrono::steady_clock::time_point start, end;
+
+	//initializing heap sort. 
+	auto heap_vec = vec;
+	auto heap_sort = std::make_unique<sorting_algorithms>(heap_vec, heap);
+
+	//heap sort time calculation. 
+	start = std::chrono::steady_clock::now();
+	heap_sort->sort();
+	end = std::chrono::steady_clock::now();
+	std::cout << "Heap sort time: " <<
+		std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+		<< " ms." << '\n';
+
+	//initializing quick sort. 
+	auto quick_vec = vec;
+	auto quick_sort = std::make_unique<sorting_algorithms>(quick_vec, quick);
+
+	//quick sort time calculation. 
+	start = std::chrono::steady_clock::now();
+	quick_sort->sort();
+	end = std::chrono::steady_clock::now();
+	std::cout << "Quick sort time: " << std::chrono::duration_cast<std::chrono::milliseconds>
+		(end - start).count() << " ms." << '\n';
+
+	//initializing bubble sort. 
+	auto bubble_vec = vec;
+	auto bubble_sort = std::make_unique<sorting_algorithms>(bubble_vec, bubble);
+
+	//bubble sort time calculation. 
+	start = std::chrono::steady_clock::now();
+	bubble_sort->sort();
+	end = std::chrono::steady_clock::now();
+	std::cout << "Bubble sort time: " << std::chrono::duration_cast<std::chrono::milliseconds>
+		(end - start).count() << " ms." << '\n';
+
+	//initializing selection sort. 
+	auto selection_vec = vec;
+	auto selection_sort = std::make_unique<sorting_algorithms>(selection_vec, selection);
+
+	//selection sort time calculation. 
+	start = std::chrono::steady_clock::now();
+	selection_sort->sort();
+	end = std::chrono::steady_clock::now();
+	std::cout << "Selection sort time: " << std::chrono::duration_cast<std::chrono::milliseconds>
+		(end - start).count() << " ms." << '\n';
+
+	//initializing insertion sort. 
+	auto insertion_vec = vec;
+	auto insertion_sort = std::make_unique<sorting_algorithms>(insertion_vec, insertion);
+
+	//insertion sort time calculation. 
+	start = std::chrono::steady_clock::now();
+	insertion_sort->sort();
+	end = std::chrono::steady_clock::now();
+	std::cout << "Insertion sort time: " << std::chrono::duration_cast<std::chrono::milliseconds>
+		(end - start).count() << " ms." << '\n';
+
+	//initializing merge sort. 
+	auto merge_vec = vec;
+	auto merge_sort = std::make_unique<sorting_algorithms>(merge_vec, mergeSort);
+
+	//insertion sort time calculation. 
+	start = std::chrono::steady_clock::now();
+	merge_sort->sort();
+	end = std::chrono::steady_clock::now();
+	std::cout << "Merge sort time: " << std::chrono::duration_cast<std::chrono::milliseconds>
+		(end - start).count() << " ms." << '\n';
+}
+
 
 std::vector<int> sorting_algorithms::sort()
 {
@@ -228,14 +303,17 @@ std::vector<int> sorting_algorithms::sort()
 		vec = _arr;
 		int size = vec.size();
 
-		//building the tree. 
+		//building the tree. (step. 1) 
 		for (int i = size / 2 - 1; i >= 0; --i)
 			heapify(vec, size, i);
 
+		//sorting.  (step. 2)
 		for (int i = size - 1; i >= 0; --i)
 		{
+			//move current root to end. 
 			std::swap(vec[i], vec[0]);
 
+			//call max heapify on max-heap. 
 			heapify(vec, i, 0);
 		}
 

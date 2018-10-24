@@ -7,15 +7,9 @@
 
 int main()
 {
-	std::vector<int> vec(1000);
+	//Sorting algorithms driver.
+	std::vector<int> vec(100);
 	std::generate(vec.begin(), vec.end(), std::rand);
-	std::vector<int> extreme{ 10,9,8,7,6,5,4,3,2,1,0 };
-	sorting_algorithms algorithm(extreme, sorting_algorithm_method::heap);
-	auto sorted_vector = algorithm.sort();
-	for (const auto& ele : sorted_vector)
-		std::cout << ele << ' ';
-	std::cout << '\n';
-	auto result = algorithm.check(vec, sorted_vector);
-	result == true ? std::cout << "success !" : std::cout << "Failed !";
+	sorting_algorithms::time_comparison(vec);
 	return EXIT_SUCCESS;
 }

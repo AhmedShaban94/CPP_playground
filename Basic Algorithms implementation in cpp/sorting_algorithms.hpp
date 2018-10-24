@@ -1,7 +1,10 @@
 #pragma once 
 
 #include<vector> 
+#include <iostream>
+#include <chrono>
 #include <algorithm>
+#include <memory>
 enum sorting_algorithm_method { bubble, quick, insertion, selection, mergeSort, heap };
 class sorting_algorithms
 {
@@ -19,7 +22,7 @@ private:
 	int partition(std::vector<int>& vec, int first_index, int last_index);
 
 	//Heap help functions.
-	void heapify(std::vector<int>& vec,int n, int root);
+	void heapify(std::vector<int>& vec, int n, int root);
 
 public:
 	/**
@@ -30,5 +33,6 @@ public:
 	sorting_algorithms(std::vector<int> arr, sorting_algorithm_method method);
 	~sorting_algorithms();
 	std::vector<int> sort();
-	bool check(const std::vector<int>& vec, const std::vector<int>& my_sorted) const; 
+	bool check(const std::vector<int>& vec, const std::vector<int>& my_sorted) const;
+	static void time_comparison(const std::vector<int>& vec);
 };
