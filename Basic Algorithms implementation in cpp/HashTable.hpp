@@ -1,6 +1,8 @@
 #pragma once 
 #include "HashNode.hpp"
 #include <vector>
+#include <random>
+#include <functional>
 
 
 class HashTable
@@ -8,6 +10,10 @@ class HashTable
 private:
 	int m_table_size;
 	std::vector<std::vector<HashNode>> table;
+	int hash_func(const int key) const
+	{
+		return std::hash<int>{}(key) % m_table_size;
+	}
 public:
 
 	HashTable(int table_size)
@@ -23,7 +29,7 @@ public:
 
 	double get(int key) const
 	{
-		auto hash = key % m_table_size;
+		auto hash = hash_func(key);
 		if (table[hash].empty())
 			return -1;
 		for (const auto& element : table[hash])
@@ -35,14 +41,14 @@ public:
 	void put(int key, double value)
 	{
 		HashNode node(key, value);
-		auto hash = key % m_table_size;
+		auto hash = hash_func(key);
 		table[hash].push_back(node);
 		table[hash].shrink_to_fit();
 	}
 
 	void remove(int key)
 	{
-		auto hash = key % m_table_size;
+		auto hash = hash_func(key);
 		unsigned int index = 0;
 		for (index = 0; index < table[hash].size(); ++index)
 			if (table[hash][index].getKey() == key)
