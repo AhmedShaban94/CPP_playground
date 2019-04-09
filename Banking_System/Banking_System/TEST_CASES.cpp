@@ -18,12 +18,12 @@ TEST_CASE("Test Bank class")
 
 	SECTION("Add Customer")
 	{
-		auto customer = std::make_unique<Customer>("Ahmed", "Shaban", "01097206301");
+		auto customer = std::make_unique<Customer>("Ahmed", "Shaban", "12345");
 		bank->addCustomer(customer.operator*());
 		auto customers = bank->listCustomers();
 		REQUIRE(customers[0].getFirstName() == "Ahmed");
 		REQUIRE(customers[0].getLastName() == "Shaban");
-		REQUIRE(customers[0].getPhoneNumber() == "01097206301");
+		REQUIRE(customers[0].getPhoneNumber() == "12345");
 		REQUIRE(customers[0].getCustomerID() == 1);
 		REQUIRE(Customer::globalCustomerID == 1);
 	}
