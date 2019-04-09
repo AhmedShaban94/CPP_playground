@@ -1,4 +1,5 @@
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS
 #include <string>
 #include <vector>
 #include <memory>
@@ -9,7 +10,8 @@
 class Account
 {
 private:
-	static long int accountID;
+	static long int globalAccountID;
+	long int accountID;
 	static long double m_balance;
 	std::tm* m_openTime;
 	std::tm* m_closeTime;
@@ -20,5 +22,6 @@ public:
 	void withdraw(const double amount);
 	long int getAccountID(void) const;
 	long double getAccountBalance(void) const;
+	bool operator == (const Account& account) const;
 };
 

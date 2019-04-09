@@ -39,3 +39,12 @@ void Bank::withdraw(Account & account, const double amount)
 {
 	account.withdraw(amount);
 }
+
+std::vector<Customer> Bank::listCustomers()
+{
+	std::vector<Customer> customers;
+	for (const auto& customer : customerAccountsMap)
+		customers.push_back(customer.first);
+	return customers;
+}
+

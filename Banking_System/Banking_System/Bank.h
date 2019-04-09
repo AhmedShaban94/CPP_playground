@@ -1,13 +1,21 @@
 #pragma once
 #include <unordered_map>
 #include <vector>
+#include <map>
 #include <iostream>
 #include "Customer.h"
 #include "Account.h"
 class Bank
 {
 private:
-	std::unordered_map<Customer, std::vector<Account> > customerAccountsMap;
+	struct customerCompare
+	{
+		bool operator () (Customer lhs, Customer rhs) const
+		{
+			return lhs.getCustomerID() < rhs.getCustomerID();
+		}
+	};
+	std::map<Customer, std::vector<Account>, customerCompare> customerAccountsMap;
 public:
 	Bank();
 	~Bank();
@@ -17,5 +25,6 @@ public:
 	void removeAccount(const Customer& customer, Account & account);
 	void deposite(Account& account, const double amount);
 	void withdraw(Account& account, const double amount);
+	std::vector<Customer> listCustomers(void);
 };
 

@@ -1,8 +1,8 @@
 #include "Customer.h"
 
+long int Customer::globalCustomerID = 0;
 
-
-Customer::Customer() = default;
+Customer::Customer() { this->customerID = ++globalCustomerID; }
 
 Customer::~Customer() = default;
 
@@ -34,4 +34,9 @@ void Customer::setPhoneNumber(const std::string& phonenumber)
 std::string Customer::getPhoneNumber(void)
 {
 	return this->m_phoneNumber;
+}
+
+long int Customer::getCustomerID(void)
+{
+	return this->customerID;
 }
