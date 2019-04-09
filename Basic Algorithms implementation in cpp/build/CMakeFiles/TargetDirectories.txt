@@ -1,4 +1,0 @@
-D:/Playground/C++/C_plus_plus_playground/Basic Algorithms implementation in cpp/build/CMakeFiles/INSTALL.dir
-D:/Playground/C++/C_plus_plus_playground/Basic Algorithms implementation in cpp/build/CMakeFiles/basic_algorithms.dir
-D:/Playground/C++/C_plus_plus_playground/Basic Algorithms implementation in cpp/build/CMakeFiles/ALL_BUILD.dir
-D:/Playground/C++/C_plus_plus_playground/Basic Algorithms implementation in cpp/build/CMakeFiles/ZERO_CHECK.dir
