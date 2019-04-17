@@ -1,4 +1,5 @@
 #include "Customer.h"
+#include <specstrings.h>
 
 long int Customer::globalCustomerID = 0;
 

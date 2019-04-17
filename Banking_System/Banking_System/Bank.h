@@ -26,5 +26,6 @@ public:
 	void deposite(Account& account, const double amount);
 	void withdraw(Account& account, const double amount);
 	std::vector<Customer> listCustomers(void);
+	std::vector<Account> listAccountsPerCustomer(const Customer& customer);  
 };
 

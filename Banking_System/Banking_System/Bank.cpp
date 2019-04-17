@@ -48,3 +48,8 @@ std::vector<Customer> Bank::listCustomers()
 	return customers;
 }
 
+std::vector<Account> Bank::listAccountsPerCustomer(const Customer& customer)
+{
+	auto iter = customerAccountsMap.find(customer);
+	return iter->second;
+}

@@ -5,15 +5,16 @@ long double Account::m_balance = 0;
 
 Account::Account()
 {
-	this->accountID = ++globalAccountID;
+	std::cout << "New Account is Open\n";  
+	globalAccountID++;
+	this->accountID = globalAccountID;
 	std::time_t t = std::time(nullptr);
 	this->m_openTime = std::localtime(&t);
 }
 
 Account::~Account()
 {
-	std::time_t t = std::time(nullptr);
-	this->m_closeTime = std::localtime(&t);
+	std::cout << "Account Deleted\n";
 }
 
 void Account::deposite(const double amount)
