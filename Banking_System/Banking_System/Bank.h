@@ -19,13 +19,13 @@ private:
 public:
 	Bank();
 	~Bank();
-	void addCustomer(const Customer& customer);
+	void addCustomer(Customer& customer);
 	bool removeCustomer(Customer& customer);
-	void addAccount(const Customer& customer, const Account & account);
+	void addAccount(const Customer& customer, Account & account);
 	void removeAccount(const Customer& customer, Account & account);
 	void deposite(Account& account, const double amount);
 	void withdraw(Account& account, const double amount);
 	std::vector<Customer> listCustomers(void);
-	std::vector<Account> listAccountsPerCustomer(const Customer& customer);  
+	std::vector<Account> listAccountsPerCustomer(const Customer& customer);
 };
 

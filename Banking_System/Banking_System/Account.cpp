@@ -5,11 +5,7 @@ long double Account::m_balance = 0;
 
 Account::Account()
 {
-	std::cout << "New Account is Open\n";  
-	globalAccountID++;
-	this->accountID = globalAccountID;
-	std::time_t t = std::time(nullptr);
-	this->m_openTime = std::localtime(&t);
+
 }
 
 Account::~Account()
@@ -37,6 +33,12 @@ long Account::getAccountID() const
 {
 	return this->accountID;
 }
+
+void Account::setAccountID(const int& ID)
+{
+	accountID = ID;
+}
+
 
 bool Account::operator==(const Account& account1) const
 {

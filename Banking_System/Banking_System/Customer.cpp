@@ -3,7 +3,7 @@
 
 long int Customer::globalCustomerID = 0;
 
-Customer::Customer() { this->customerID = ++globalCustomerID; }
+Customer::Customer() { }
 
 Customer::~Customer() = default;
 
@@ -40,4 +40,9 @@ std::string Customer::getPhoneNumber(void)
 long int Customer::getCustomerID(void)
 {
 	return this->customerID;
+}
+
+void Customer::setCustomerID(const int& ID)
+{
+	customerID = ID; 
 }

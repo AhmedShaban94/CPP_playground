@@ -8,8 +8,9 @@ Bank::~Bank()
 {
 }
 
-void Bank::addCustomer(const Customer & customer)
+void Bank::addCustomer(Customer & customer)
 {
+	customer.setCustomerID(Customer::globalCustomerID++);
 	customerAccountsMap.insert(std::make_pair(customer, std::vector<Account>()));
 }
 
@@ -18,9 +19,10 @@ bool Bank::removeCustomer(Customer & customer)
 	return customerAccountsMap.erase(customer);
 }
 
-void Bank::addAccount(const Customer& customer, const Account & account)
+void Bank::addAccount(const Customer& customer, Account & account)
 {
 	auto& accounts = customerAccountsMap.at(customer);
+	account.setAccountID(Account::globalAccountID++);
 	accounts.push_back(account);
 }
 

@@ -14,7 +14,7 @@ public:
 	Customer();
 	~Customer();
 	Customer(std::string firstName, std::string lastName, std::string phonenumber) :
-		m_firstName{ firstName }, m_lastName{ lastName }, m_phoneNumber{ phonenumber } { this->customerID = ++globalCustomerID; }
+		m_firstName{ firstName }, m_lastName{ lastName }, m_phoneNumber{ phonenumber }{}
 	void setFirstName(const std::string& firstName);
 	std::string getFirstName(void);
 	void setlastName(const std::string& lastname);
@@ -22,4 +22,5 @@ public:
 	void setPhoneNumber(const std::string& phonenumber);
 	std::string getPhoneNumber(void);
 	long int getCustomerID(void);
+	void setCustomerID(const int& ID);
 };

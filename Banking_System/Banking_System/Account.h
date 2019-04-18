@@ -23,6 +23,7 @@ public:
 	void withdraw(const double amount);
 	long int getAccountID(void) const;
 	long double getAccountBalance(void) const;
+	void setAccountID(const int& ID); 
 	bool operator == (const Account& account) const;
 };
 
