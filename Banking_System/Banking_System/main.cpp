@@ -81,6 +81,8 @@ int main(int argc, char* argv[])
 			for (const auto& account : listOfAccounts)
 				std::cout << account.getAccountID() << '\n';
 			int accountChoice;
+			std::cout << "Enter account choice: \n";
+			std::cin >> accountChoice;
 			bool found = false;
 			for (auto& account : listOfAccounts)
 			{
@@ -96,6 +98,22 @@ int main(int argc, char* argv[])
 			}
 			if (!found) std::cout << "Invalid account ID was Entered\n";
 			break;
+		}
+		case 5:
+		{
+
+		}
+		case 6:
+		{
+
+		}
+		case 7:
+		{
+
+		}
+		case 8:
+		{
+
 		}
 		default:
 			std::cout << "\n\t Enter a valid choice";
