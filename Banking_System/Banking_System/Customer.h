@@ -16,11 +16,11 @@ public:
 	Customer(std::string firstName, std::string lastName, std::string phonenumber) :
 		m_firstName{ firstName }, m_lastName{ lastName }, m_phoneNumber{ phonenumber }{}
 	void setFirstName(const std::string& firstName);
-	std::string getFirstName(void);
+	std::string getFirstName(void) const;
 	void setlastName(const std::string& lastname);
-	std::string getLastName(void);
+	std::string getLastName(void) const;
 	void setPhoneNumber(const std::string& phonenumber);
-	std::string getPhoneNumber(void);
-	long int getCustomerID(void);
+	std::string getPhoneNumber(void) const;
+	long int getCustomerID(void)const;
 	void setCustomerID(const int& ID);
 };
