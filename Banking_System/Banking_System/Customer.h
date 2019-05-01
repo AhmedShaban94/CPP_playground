@@ -13,8 +13,8 @@ public:
 	static long int globalCustomerID;
 	Customer();
 	~Customer();
-	Customer(std::string firstName, std::string lastName, std::string phonenumber) :
-		m_firstName{ firstName }, m_lastName{ lastName }, m_phoneNumber{ phonenumber }{}
+	Customer(const std::string& firstName, const std::string& lastName, const std::string& phonenumber) :
+		m_firstName{ firstName }, m_lastName{ lastName }, m_phoneNumber{ phonenumber }{ customerID = 0;  }
 	void setFirstName(const std::string& firstName);
 	std::string getFirstName(void) const;
 	void setlastName(const std::string& lastname);

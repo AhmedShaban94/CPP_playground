@@ -1,8 +1,7 @@
 #pragma once
-#include <unordered_map>
 #include <vector>
 #include <map>
-#include <iostream>
+#include <algorithm>
 #include "Customer.h"
 #include "Account.h"
 class Bank
@@ -10,7 +9,7 @@ class Bank
 private:
 	struct customerCompare
 	{
-		bool operator () (Customer lhs, Customer rhs) const
+		bool operator () (const Customer& lhs, const Customer& rhs) const
 		{
 			return lhs.getCustomerID() < rhs.getCustomerID();
 		}

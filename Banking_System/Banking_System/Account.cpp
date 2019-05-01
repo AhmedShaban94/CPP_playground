@@ -1,24 +1,21 @@
 #include "Account.h"
-
+#include <iostream>
 long int Account::globalAccountID = 0;
 long double Account::m_balance = 0;
 
 Account::Account()
 {
-
+	accountID = NULL; 
 }
 
-Account::~Account()
-{
-	std::cout << "Account Deleted\n";
-}
+Account::~Account() = default;
 
-void Account::deposite(const double amount)
+void Account::deposite(const double& amount)
 {
 	this->m_balance += amount;
 }
 
-void Account::withdraw(const double amount)
+void Account::withdraw(const double& amount)
 {
 	this->m_balance -= amount;
 }
