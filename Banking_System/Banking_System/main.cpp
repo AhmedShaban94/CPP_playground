@@ -4,12 +4,14 @@
 #include "Account.h"
 #include <vector>
 #include <exception>
+#include <limits>
 
 
 int main(int argc, char* argv[])
 {
 	auto bank = std::make_unique<Bank>();
 	int choice;
+	bool show_again = false;
 	std::cout << "***** Banking System *****\n";
 	do
 	{
@@ -42,11 +44,25 @@ int main(int argc, char* argv[])
 				std::getline(std::cin, phoneNumber);
 				auto new_customer = std::make_unique<Customer>(firstName, lastName, phoneNumber);
 				auto account = std::make_unique<Account>();
-				bank->addCustomer(new_customer.operator*());  
+				bank->addCustomer(new_customer.operator*());
 				bank->addAccount(new_customer.operator*(), account.operator*());
+
+				// check if main menu wanted again
+				std::string main_menu_choice = "";
+				std::cout << "Do you want to show main menu again ? Y/N \n";
+				std::getline(std::cin, main_menu_choice);
+				if (main_menu_choice == "Y" || main_menu_choice == "y")
+					show_again = true;
+				else if (main_menu_choice == "N" || main_menu_choice == "n")
+					show_again = false;
+				else
+				{
+					std::cout << "invalid choice\n";
+					show_again = true;
+				}
 				break;
 			}
-			catch (std::exception& ex)
+			catch (const std::exception& ex)
 			{
 				std::cout << ex.what() << '\n';
 				exit(0);
@@ -70,7 +86,7 @@ int main(int argc, char* argv[])
 				bank->addAccount(Customer(firstName, lastName, phoneNumber), *(new Account()));
 				break;
 			}
-			catch (std::exception& ex)
+			catch (const std::exception& ex)
 			{
 				std::cout << ex.what() << '\n';
 				exit(1);
@@ -97,7 +113,7 @@ int main(int argc, char* argv[])
 					std::cout << account.getAccountID() << ": " << account.getAccountBalance() << " $\n";
 				break;
 			}
-			catch (std::exception& ex)
+			catch (const std::exception& ex)
 			{
 				std::cout << ex.what() << '\n';
 				exit(2);
@@ -123,6 +139,7 @@ int main(int argc, char* argv[])
 					std::cout << account.getAccountID() << '\n';
 				int accountChoice;
 				std::cout << "Enter account choice: \n";
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 				std::cin >> accountChoice;
 				bool found = false;
 				for (auto& account : listOfAccounts)
@@ -140,7 +157,7 @@ int main(int argc, char* argv[])
 				if (!found) std::cout << "Invalid account ID was Entered\n";
 				break;
 			}
-			catch (std::exception& ex)
+			catch (const std::exception& ex)
 			{
 				std::cout << ex.what() << '\n';
 				exit(3);
@@ -167,6 +184,7 @@ int main(int argc, char* argv[])
 					std::cout << account.getAccountID() << '\n';
 				int accountChoice;
 				std::cout << "Enter account choice: \n";
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 				std::cin >> accountChoice;
 				bool found = false;
 				for (auto& account : listOfAccounts)
@@ -210,6 +228,7 @@ int main(int argc, char* argv[])
 					std::cout << account.getAccountID() << '\n';
 				int accountChoice;
 				std::cout << "Enter account choice: \n";
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 				std::cin >> accountChoice;
 				bool found = false;
 				for (auto& account : listOfAccounts)
@@ -229,7 +248,6 @@ int main(int argc, char* argv[])
 				std::cout << ex.what() << '\n';
 				exit(5);
 			}
-
 		}
 		case 7:
 		{
@@ -264,12 +282,11 @@ int main(int argc, char* argv[])
 				std::cout << ex.what() << '\n';
 				exit(7);
 			}
-
 		}
 		default:
 			std::cout << "\n\t Enter a valid choice";
 			exit(0);
 		}
-	} while (choice != 9);
+	} while (choice != 9 || show_again);
 }
 
