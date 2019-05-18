@@ -6,6 +6,28 @@
 #include <exception>
 #include <limits>
 
+struct userInput
+{
+	std::string firstName;
+	std::string lastName;
+	std::string phoneNumber;
+};
+
+userInput get_user_input(void)
+{
+	std::string firstName, lastName, phoneNumber;
+	std::cout << "Enter First Name: \n";
+	std::cin.ignore();
+	std::getline(std::cin, firstName);
+	std::cout << "Enter Last Name: \n";
+	std::cin.ignore();
+	std::getline(std::cin, lastName);
+	std::cout << "Enter Phone Number: \n";
+	std::cin.ignore();
+	std::getline(std::cin, phoneNumber);
+	userInput user_input{ firstName, lastName, phoneNumber };
+	return user_input;
+}
 
 int main(int argc, char* argv[])
 {
@@ -32,17 +54,8 @@ int main(int argc, char* argv[])
 		{
 			try
 			{
-				std::string firstName, lastName, phoneNumber;
-				std::cout << "Enter First Name: \n";
-				std::cin.ignore();
-				std::getline(std::cin, firstName);
-				std::cout << "Enter Last Name: \n";
-				std::cin.ignore();
-				std::getline(std::cin, lastName);
-				std::cout << "Enter Phone Number: \n";
-				std::cin.ignore();
-				std::getline(std::cin, phoneNumber);
-				auto new_customer = std::make_unique<Customer>(firstName, lastName, phoneNumber);
+				auto user_input = get_user_input();
+				auto new_customer = std::make_unique<Customer>(user_input.firstName, user_input.lastName, user_input.phoneNumber);
 				auto account = std::make_unique<Account>();
 				bank->addCustomer(new_customer.operator*());
 				bank->addAccount(new_customer.operator*(), account.operator*());
@@ -73,17 +86,8 @@ int main(int argc, char* argv[])
 		{
 			try
 			{
-				std::string firstName, lastName, phoneNumber;
-				std::cout << "Enter First Name: \n";
-				std::cin.ignore();
-				std::getline(std::cin, firstName);
-				std::cout << "Enter Last Name: \n";
-				std::cin.ignore();
-				std::getline(std::cin, lastName);
-				std::cout << "Enter Phone number: \n";
-				std::cin.ignore();
-				std::getline(std::cin, phoneNumber);
-				bank->addAccount(Customer(firstName, lastName, phoneNumber), *(new Account()));
+				auto user_input = get_user_input();
+				bank->addAccount(Customer(user_input.firstName, user_input.lastName, user_input.phoneNumber), *(new Account()));
 				break;
 			}
 			catch (const std::exception& ex)
@@ -97,17 +101,8 @@ int main(int argc, char* argv[])
 		{
 			try
 			{
-				std::string firstName, lastName, phoneNumber;
-				std::cout << "Enter First Name: \n";
-				std::cin.ignore();
-				std::getline(std::cin, firstName);
-				std::cout << "Enter Last Name: \n";
-				std::cin.ignore();
-				std::getline(std::cin, lastName);
-				std::cout << "Enter Phone number: \n";
-				std::cin.ignore();
-				std::getline(std::cin, phoneNumber);
-				Customer customer(firstName, lastName, phoneNumber);
+				auto user_input = get_user_input();
+				Customer customer(user_input.firstName, user_input.lastName, user_input.phoneNumber);
 				auto listOfAccounts = bank->listAccountsPerCustomer(customer);
 				for (const auto& account : listOfAccounts)
 					std::cout << account.getAccountID() << ": " << account.getAccountBalance() << " $\n";
@@ -123,16 +118,8 @@ int main(int argc, char* argv[])
 		{
 			try
 			{
-				std::string firstName, lastName, phoneNumber;
-				std::cout << "Enter First Name: \n";
-				std::cin.ignore();
-				std::getline(std::cin, firstName);
-				std::cout << "Enter Last Name: \n";
-				std::cin.ignore();
-				std::getline(std::cin, lastName);
-				std::cout << "Enter Phone number: \n";
-				std::cin.ignore();
-				Customer customer(firstName, lastName, phoneNumber);
+				auto user_input = get_user_input();
+				Customer customer(user_input.firstName, user_input.lastName, user_input.phoneNumber);
 				auto listOfAccounts = bank->listAccountsPerCustomer(customer);
 				std::cout << "Choose Account from the following Accounts\n";
 				for (const auto& account : listOfAccounts)
@@ -168,16 +155,8 @@ int main(int argc, char* argv[])
 		{
 			try
 			{
-				std::string firstName, lastName, phoneNumber;
-				std::cout << "Enter First Name: \n";
-				std::cin.ignore();
-				std::getline(std::cin, firstName);
-				std::cout << "Enter Last Name: \n";
-				std::cin.ignore();
-				std::getline(std::cin, lastName);
-				std::cout << "Enter Phone number: \n";
-				std::cin.ignore();
-				Customer customer(firstName, lastName, phoneNumber);
+				auto user_input = get_user_input();
+				Customer customer(user_input.firstName, user_input.lastName, user_input.phoneNumber);
 				auto listOfAccounts = bank->listAccountsPerCustomer(customer);
 				std::cout << "Choose Account from the following Accounts\n";
 				for (const auto& account : listOfAccounts)
@@ -212,16 +191,8 @@ int main(int argc, char* argv[])
 		{
 			try
 			{
-				std::string firstName, lastName, phoneNumber;
-				std::cout << "Enter First Name: \n";
-				std::cin.ignore();
-				std::getline(std::cin, firstName);
-				std::cout << "Enter Last Name: \n";
-				std::cin.ignore();
-				std::getline(std::cin, lastName);
-				std::cout << "Enter Phone number: \n";
-				std::cin.ignore();
-				Customer customer(firstName, lastName, phoneNumber);
+				auto user_input = get_user_input();
+				Customer customer(user_input.firstName, user_input.lastName, user_input.phoneNumber);
 				auto listOfAccounts = bank->listAccountsPerCustomer(customer);
 				std::cout << "Choose Account from the following Accounts\n";
 				for (const auto& account : listOfAccounts)
